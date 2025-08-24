@@ -1,0 +1,18 @@
+<!doctype html>
+<meta charset="utf-8">
+<script>
+/**
+ * SPA fallback для GitHub Pages.
+ * 1) Запам'ятовуємо повний шлях, на який зайшли (/ru/citizenship).
+ * 2) Редиректимо на корінь репозиторію.
+ * 3) У index.html перехопимо значення і зробимо history.replaceState(...)
+ */
+(function () {
+  // base = "/<repo>/" (для user.github.io/<repo>/...), або "/" якщо на корені
+  var parts = location.pathname.split('/').filter(Boolean);
+  var base  = '/' + (parts.length ? parts[0] + '/' : '');
+
+  sessionStorage.setItem('spa-redirect', location.pathname + location.search + location.hash);
+  location.replace(base);
+})();
+</script>
